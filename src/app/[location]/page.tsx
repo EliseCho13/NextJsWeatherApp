@@ -1,5 +1,6 @@
 import { getForecast } from "@/utils/getForecast";
 import HomeButton from "../../components/homeButton";
+import style from "../style.module.css";
 
 type Props = {
   params: {
@@ -22,8 +23,8 @@ export default async function Detail({ params, searchParams }: Props) {
   const res = await getForecast(params.location);
 
   return (
-    <>
-      <h1>{name}의 3일 예보</h1>
+    <div className={style.container}>
+      <h1 className={style.title}>{name}의 3일 예보</h1>
       <ul>
         {res.forecast.forecastday.map((day) => (
           <li key={day.date}>
@@ -32,6 +33,6 @@ export default async function Detail({ params, searchParams }: Props) {
         ))}
       </ul>
       <HomeButton></HomeButton>
-    </>
+    </div>
   );
 }
