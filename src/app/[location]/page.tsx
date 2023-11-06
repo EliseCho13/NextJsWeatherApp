@@ -1,6 +1,7 @@
 import { getForecast } from "@/utils/getForecast";
 import HomeButton from "../../components/homeButton";
 import style from "../style.module.css";
+import pageStyle from "./pageStyle.module.css";
 
 type Props = {
   params: {
@@ -25,10 +26,13 @@ export default async function Detail({ params, searchParams }: Props) {
   return (
     <div className={style.container}>
       <h1 className={style.title}>{name}의 3일 예보</h1>
-      <ul>
+      <ul className={pageStyle.ul}>
         {res.forecast.forecastday.map((day) => (
-          <li key={day.date}>
-            {day.date} / {day.day.avgtemp_c}
+          <li key={day.date} className={pageStyle.li}>
+            {day.date.slice(0, 4)}년 {day.date.slice(5, 7)}월{" "}
+            {day.date.slice(8, 10)}일 - {day.day.avgtemp_c}도 -{" "}
+            {day.day.condition.text} -{" "}
+            {JSON.stringify(day.day.daily_chance_of_rain)}%
           </li>
         ))}
       </ul>
